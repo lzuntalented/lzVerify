@@ -18,7 +18,7 @@
  * 		} 
  * 
  * 		var msg = lzVerify.getErrorMsg(true);
- * 		if(!msg){
+ * 		if(msg){
  *			alert(msg);//数据验证不通过
  *		}
  *		
@@ -52,9 +52,18 @@
 	 * 正整数验证规则
 	 * @param value 待验证的值
 	 * */
-	lzVerify.prototype.only_number = function (value){
+	lzVerify.prototype.number_greater_0 = function (value){
 		var ret = /^[1-9]\d*$/.test(value);
 		return ret;
+	}
+	
+	/*
+	 * 纯数字验证规则
+	 * @param value 待验证的值
+	 * */
+	lzVerify.prototype.only_number = function (value){
+		var ret = /[^0-9]/.test(value);
+		return !ret;
 	}
 	
 	/*
@@ -80,6 +89,34 @@
 			return value.length > list[0] && value.length < list[1];
 		}
 	}
+	
+	/*
+	 * 手机号验证规则
+	 * @param value 待验证的值
+	 * */
+	lzVerify.prototype.mobile = function (value){
+		var ret = /^1[34578]\d{9}$/.test(value);
+		return ret;
+	}
+	
+	/*
+	 * 中文字符验证规则
+	 * @param value 待验证的值
+	 * */
+	lzVerify.prototype.china_char = function (value){
+		var ret = /[^\u4e00-\u9fa5]/.test(value);
+		return !ret;
+	}
+	
+	/*
+	 * 纯字母验证规则
+	 * @param value 待验证的值
+	 * */
+	lzVerify.prototype.alpha = function (value){
+		var ret = /[^a-zA-Z]/.test(value);
+		return !ret;
+	}
+
 	//===========================验证规则函数end=============================
 	
 	/*
